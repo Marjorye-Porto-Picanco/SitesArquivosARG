@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Arquivos da ﾶﾑ尺ﾌの⁺˚⋆｡°🍄₊</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background: #fff0f5;
+      color: #5a2a3a;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background: #ffb6d5;
+      padding: 10px 0;
+    } 
+
+    .navbar a{
+      color: #5a2a3a;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #ff4d88;
+      transform: scale(1.1);
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background: #ffd6e7;
+      border-bottom: 2px dashed #ff9ecb;
+    }
+
+    h1 {
+      font-size: 2em;
+      letter-spacing: 2px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background: #ffeaf3;
+      border: 2px solid #ffb6d5;
+      border-radius: 15px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: scale(1.05) rotate(-1deg);
+      background: #fff;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff0f5;
+      border: 2px solid #ff8ac4;
+      padding: 20px;
+      z-index: 10;
+      width: 300px;
+      box-shadow: 0 0 20px rgba(255, 150, 200, 0.5);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 200, 220, 0.5);
+      z-index: 5;
+    }
+
+    .glitch {
+      animation: glitch 1s infinite;
+      color: #ff4d88;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      25% { transform: translate(-2px, 2px); }
+      50% { transform: translate(2px, -2px); }
+      75% { transform: translate(-1px, 1px); }---
+      100% { transform: translate(0); }
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+
+    
+  <h1>♡ Arquivos da ﾶﾑ尺ﾌの⁺˚⋆｡°🍄₊ ♡</h1>
+  <p class="glitch">Como você chegou aqui? De qualquer jeito, seja bem-vindo!</p>
+  
+</header>
+
+<div>
+  <nav class="navbar">
+      <a href="inicio.html">Início</a>
+      <a href="arquivos.html">Arquivos</a> 
+      <a href="entidades.html">Entidades</a>
+      <a href="devlog.html">Devlog</a>
+      <a href="contact.html">Sobre Nós</a>
+    </nav>
+</div>
+
+
+<div class="container">
+
+  <div class="card" onclick="openPopup('game1')">
+    <img class="game-image" src="img/dollmaker.jpg" alt="Fabricante de Bonecas Bonitas">
+    <p>Fabricante de Bonecas Bonitas</p>
+  </div>
+
+  <div class="card" onclick="openPopup('game2')">
+    <img class="game-image" src="img/teaparty.jpg" alt="Festa do Chá.exe">
+    <p>Festa do Chá.exe</p>
+  </div>
+
+  <div class="card" onclick="openPopup('game3')">
+    <img class="game-image" src="img/mirror.jpg" alt="??? no espelho">
+    <p>??? no espelho</p>
+  </div>
+
+</div>
+
+<div id="overlay" class="overlay hidden" onclick="closePopup()"></div>
+
+<div id="popup" class="popup hidden">
+  <p id="popup-text"></p>
+  <button onclick="closePopup()">fechar</button>
+</div>
+
+<script>
+
+  // Arrumei as imagens para 200x120 no card
+  window.addEventListener('load', function() {
+    const gameImages = document.querySelectorAll('.game-image');
+    gameImages.forEach(img => {
+      img.width = 200;
+      img.height = 120;
+      img.style.objectFit = 'cover';
+    });
+  });
+
+  function openPopup(game) {
+    const text = {
+      game1: "ela não pisca mais...",
+      game2: "você esteve aqui...?",
+      game3: "não olhe por muito tempo"
+    };
+
+    document.getElementById('popup-text').innerText = text[game];
+    document.getElementById('popup').classList.remove('hidden');
+    document.getElementById('overlay').classList.remove('hidden');
+
+    if(game === 'game3'){
+      setTimeout(() => {
+        alert('eu estou atrás de você');
+      }, 2000);
+    }
+  }
+
+  function closePopup() {
+    document.getElementById('popup').classList.add('hidden');
+    document.getElementById('overlay').classList.add('hidden');
+  }
+
+</script>
+
+</body>
+</html>

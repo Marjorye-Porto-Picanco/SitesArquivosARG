@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquivos</title>
+    <style>
+        body{
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #fff0f5;
+            color: #5a2a3a;
+            overflow-x: hidden;
+        }
+
+        .navbar{
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            background: #ffb6d5;
+            padding: 10px 0;
+        }
+
+        .navbar a{
+            color: #5a2a3a;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover{
+            color: #ff4d88;
+            transform: scale(1.1);
+        }
+
+        header{
+            text-align: center;
+            padding: 20px;
+            background: #ffd6e7;
+            border-bottom: 2px dashed #ff9ecb; ;
+        }
+
+        h1{
+            font-size: 2em;
+            letter-spacing: 2px;
+        }
+
+        .container{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .cardArquivo{
+            background: #ffeaf3;
+            border: 2px solid #ffb6d5;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .cardArquivo:hover{
+            transform: scale(1.05) rotate(-1deg);
+            background: #fff;
+        }
+
+        .cardArquivo img{
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .hidden{
+            display: none;
+        }
+
+        .popup{
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff0f5;
+            border: 2px solid #ff8ac4;
+            padding: 20px;
+             z-index: 10;
+             width: 300px;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .overlay{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 5;
+        }
+
+        .glitch {
+            font-size: 1.2em;
+            color: #ff4d88;
+            animation: glitch 1s infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            25% { transform: translate(-2px, 2px); }
+            50% { transform: translate(2px, -2px); }
+            75% { transform: translate(-1px, 1px); }
+            100% { transform: translate(0); }
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Arquivos Confidenciais</h1>
+        <p class="glitch">Você tem certeza que quer ver o que tem aqui?</p>
+    </header>
+
+    <div>
+        <nav class="navbar">
+            <a href="inicio.html">Início</a>
+            <a href="arquivos.html">Arquivos</a>
+            <a href="entidades.html">Entidades</a>
+            <a href="devlog.html">Devlog</a>
+            <a href="contact.html">Sobre Nós</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="cardArquivo" onclick="openDocument('Arquivo1.exe')">
+            <img class="game-image" src="img/arquivo1.jpg" alt="Arquivo 1">
+            <p>Arquivo 1</p>
+
+        </div>
+
+        <div class="cardArquivo" onclick="openDocument('Arquivo2.exe')">
+            <img class="game-image" src="img/arquivo2.jpg" alt="Arquivo 2">
+            <p>Arquivo 2</p>
+        </div>
+
+        <div class="cardArquivo" onclick="openDocument('Arquivo3.exe')">
+            <img class="game-image" src="img/arquivo3.jpg" alt="Arquivo 3">
+            <p>Arquivo 3</p>
+        </div>
+
+    </div>
+
+    <div id="overlay" class="overlay hidden" onclick="closePopup()"></div>
+
+    <div id="popup" class="popup hidden">
+        <p id="popup-text"></p>
+        <button onclick="closePopup()">fechar</button>
+    </div>
+
+    <script>
+        const content = {
+            'Arquivo1.exe': 'O Arquivo 1 contém informações sobre um projeto secreto que estamos desenvolvendo. Ele é altamente confidencial e só pode ser acessado por pessoas autorizadas.',
+            'Arquivo2.exe': 'O Arquivo 2 é um banco de dados com registros de clientes e transações. Ele é protegido por criptografia avançada para garantir a segurança dos dados.',
+            'Arquivo3.exe': 'O Arquivo 3 é um relatório das entidades que mostra o características das entidades nos últimos meses. Ele é usado para estudos internos e não deve ser compartilhado com terceiros.'
+        };
+
+        const passwords = {
+            'Arquivo2.exe': 'senha123',
+            'Arquivo3.exe': 'senha456'
+        };
+
+        function openDocument(arquivo) {
+            if (passwords[arquivo]) {
+                const password = prompt(`Digite a senha para acessar ${arquivo}:`);
+                if (password === passwords[arquivo]) {
+                    showPopup(content[arquivo]);
+                } else {
+                    alert('Senha incorreta! Tente novamente ou escolha outro arquivo.');
+                }
+            } else {
+                showPopup(content[arquivo]);
+            }
+        }
+
+        function showPopup(text) {
+            document.getElementById('popup-text').textContent = text;
+            document.getElementById('popup').classList.remove('hidden');
+            document.getElementById('overlay').classList.remove('hidden');
+        }
+
+        function closePopup() {
+            document.getElementById('popup').classList.add('hidden');
+            document.getElementById('overlay').classList.add('hidden');
+        }
+    </script>
+
+</body>
+
+</html>
