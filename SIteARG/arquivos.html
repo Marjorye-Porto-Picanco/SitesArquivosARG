@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -151,6 +151,12 @@
             <p>Arquivo 3</p>
         </div>
 
+        <div class="cardArquivo" onclick="openDocument('Arquivo4.exe')">
+            <img class="game-image" src="img/arquivo4.jpg" alt="Arquivo 4">
+            <p>Arquivo 4</p>
+
+        </div>
+
     </div>
 
     <div id="overlay" class="overlay hidden" onclick="closePopup()"></div>
@@ -164,7 +170,8 @@
         const content = {
             'Arquivo1.exe': 'O Arquivo 1 contém informações sobre um projeto secreto que estamos desenvolvendo. Ele é altamente confidencial e só pode ser acessado por pessoas autorizadas.',
             'Arquivo2.exe': 'O Arquivo 2 é um banco de dados com registros de clientes e transações. Ele é protegido por criptografia avançada para garantir a segurança dos dados.',
-            'Arquivo3.exe': 'O Arquivo 3 é um relatório das entidades que mostra o características das entidades nos últimos meses. Ele é usado para estudos internos e não deve ser compartilhado com terceiros.'
+            'Arquivo3.exe': 'O Arquivo 3 é um relatório das entidades que mostra o características das entidades nos últimos meses. Ele é usado para estudos internos e não deve ser compartilhado com terceiros.',
+            'Arquivo4.exe': 'O Arquivo 4 é um documento de planejamento estratégico para os próximos anos. Ele contém informações sensíveis sobre nossos planos de expansão e parcerias futuras.'
         };
 
         const passwords = {

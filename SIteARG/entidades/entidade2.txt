@@ -1,0 +1,4 @@
+Entidade 2
+
+Este documento descreve a Entidade 2 e pode ser aberto sem senha.
+Inclui dados gerais sobre características e comportamentos.

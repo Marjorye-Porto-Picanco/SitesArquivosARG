@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entidades</title>
+    <style>
+        body{
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #fff0f5;
+            color: #5a2a3a;
+            overflow-x: hidden;
+        }
+
+        .navbar{
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            background: #ffb6d5;
+            padding: 10px 0;
+        }
+
+        .navbar a{
+            color: #5a2a3a;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover{
+            color: #ff4d88;
+            transform: scale(1.1);
+        }
+
+        header{
+            text-align: center;
+            padding: 20px;
+            background: #ffd6e7;
+            border-bottom: 2px dashed #ff9ecb; ;
+        }
+
+        h1{
+            font-size: 2em;
+            letter-spacing: 2px;
+        }
+
+        .container{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .cardEntidade {
+            background: #ffeaf3;
+            border: 2px solid #ffb6d5;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cardEntidade:hover {
+            transform: scale(1.05) rotate(-1deg);
+            background: #fff;
+            box-shadow: 0 8px 18px rgba(255, 182, 213, 0.35);
+        }
+
+        .entidade-image {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card-status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: #ffdee7;
+            color: #9e2854;
+            font-size: 0.9em;
+            margin-top: 6px;
+        }
+
+        .card-description {
+            margin: 10px 0 14px;
+            line-height: 1.4;
+            color: #5a2a3a;
+        }
+
+        .card-file {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: #ff9ecb;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 6px 4px 0;
+        }
+
+        .card-file:hover {
+            background: #ff4d88;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            border: 2px solid #ffb6d5;
+            border-radius: 15px;
+            padding: 20px;
+            z-index: 1001;
+            width: 300px;
+            text-align: center;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 200, 220, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .overlay.hidden,
+        .popup.hidden {
+            display: none;
+        }
+
+        .glitch {
+            font-size: 1.2em;
+            color: #ff4d88;
+            position: relative;
+            animation: glitch 1s infinite;
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 2px 0 #ff4d88, -2px 0 #ff4d88;
+            }
+            20% {
+                text-shadow: -2px 0 #ff4d88, 2px 0 #ff4d88;
+            }
+            40% {
+                text-shadow: 2px 0 #ff4d88, -2px 0 #ff4d88;
+            }
+            60% {
+                text-shadow: -2px 0 #ff4d88, 2px 0 #ff4d88;
+            }
+            80% {
+                text-shadow: 2px 0 #ff4d88, -2px 0 #ff4d88;
+            }
+            100% {
+                text-shadow: -2px 0 #ff4d88, 2px 0 #ff4d88;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Entidades</h1>
+        <p class="glitch">!!!Tome cuidado com o que está vendo!!!</p>
+    </header>
+
+    <div>
+        <nav class="navbar">
+            <a href="inicio.html">Início</a>
+            <a href="arquivos.html">Arquivos</a>
+            <a href="entidades.html">Entidades</a>
+            <a href="devlog.html">Devlog</a>
+            <a href="contact.html">Contato</a>
+        </nav>
+    </div>
+
+    <p class="resumo" style="text-align: center; padding: 0 20px; font-size: 1.30em; margin-bottom: 30px; margin-top: 80px;">Alguns dos arquivos abaixo que falam sobre as entidades exigem senha para abri-lo e lê-lo por conta de imagens e conteúdo que pode aterrorizar, já outras podem ser consultadas sem senha.</p>
+
+    <div class="container">
+        <div class="cardEntidade">
+            <img class="entidade-image" src="img/dollmaker.jpg" alt="Entidade 1">
+            <h2>Entidade 1</h2>
+            <span class="card-status">Senha necessária</span>
+            <p class="card-description">Este arquivo é confidencial e exige senha para visualizar o resumo completo.</p>
+            <a class="card-file" href="entidades/entidade1.txt" target="_blank">Abrir arquivo</a>
+            <button class="card-file" type="button" onclick="openDocument('entidade1.txt')">Ver resumo</button>
+        </div>
+
+        <div class="cardEntidade">
+            <img class="entidade-image" src="img/mirror.jpg" alt="Entidade 2">
+            <h2>Entidade 2</h2>
+            <span class="card-status">Sem senha</span>
+            <p class="card-description">O arquivo desta entidade pode ser aberto direto, sem necessidade de senha.</p>
+            <a class="card-file" href="entidades/entidade2.txt" target="_blank">Abrir arquivo</a>
+            <button class="card-file" type="button" onclick="openDocument('entidade2.txt')">Ver resumo</button>
+        </div>
+
+        <div class="cardEntidade">
+            <img class="entidade-image" src="img/teaparty.jpg" alt="Entidade 3">
+            <h2>Entidade 3</h2>
+            <span class="card-status">Senha necessária</span>
+            <p class="card-description">A entidade 3 está protegida; o resumo pede senha para ser mostrado.</p>
+            <a class="card-file" href="entidades/entidade3.txt" target="_blank">Abrir arquivo</a>
+            <button class="card-file" type="button" onclick="openDocument('entidade3.txt')">Ver resumo</button>
+        </div>
+
+        <div class="cardEntidade">
+            <img class="entidade-image" src="img/dollmaker.jpg" alt="Entidade 4">
+            <h2>Entidade 4</h2>
+            <span class="card-status">Sem senha</span>
+            <p class="card-description">Abrir o arquivo da entidade 4 é direto e sem proteção.</p>
+            <a class="card-file" href="entidades/entidade4.txt" target="_blank">Abrir arquivo</a>
+            <button class="card-file" type="button" onclick="openDocument('entidade4.txt')">Ver resumo</button>
+        </div>
+
+        <div class="cardEntidade">
+            <img class="entidade-image" src="img/mirror.jpg" alt="Entidade 5">
+            <h2>Entidade 5</h2>
+            <span class="card-status">Senha necessária</span>
+            <p class="card-description">O arquivo da entidade 5 é protegido; senha obrigatória.</p>
+            <a class="card-file" href="entidades/entidade5.txt" target="_blank">Abrir arquivo</a>
+            <button class="card-file" type="button" onclick="openDocument('entidade5.txt')">Ver resumo</button>
+        </div>
+
+        <div class="cardEntidade">
+            <img class="entidade-image" src="img/teaparty.jpg" alt="Entidade 6">
+            <h2>Entidade 6</h2>
+            <span class="card-status">Sem senha</span>
+            <p class="card-description">Arquivo livre para consulta imediata, sem senha necessária.</p>
+            <a class="card-file" href="entidades/entidade6.txt" target="_blank">Abrir arquivo</a>
+            <button class="card-file" type="button" onclick="openDocument('entidade6.txt')">Ver resumo</button>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay hidden" onclick="closePopup()"></div>
+    <div id="popup" class="popup hidden">
+        <p id="popup-text"></p>
+        <button class="card-file" type="button" onclick="closePopup()">Fechar</button>
+    </div>
+
+    <script>
+        const content = {
+            'entidade1.txt': { text: 'Entidade 1: informações confidenciais e anotações importantes.', password: '1234' },
+            'entidade2.txt': { text: 'Entidade 2: documento liberado sem senha, explicando características e nomeações.', password: null },
+            'entidade3.txt': { text: 'Entidade 3: dados protegidos. Esta entidade exige uma senha para ver o conteúdo completo.', password: '4321' },
+            'entidade4.txt': { text: 'Entidade 4: arquivo disponível sem senha, com descrição da entidade.', password: null },
+            'entidade5.txt': { text: 'Entidade 5: documento protegido. Insira a senha correta para continuar.', password: '9999' },
+            'entidade6.txt': { text: 'Entidade 6: este arquivo está livre para consulta sem senha.', password: null }
+        };
+
+        function openDocument(documentName) {
+            const entry = content[documentName];
+
+            if (!entry) {
+                alert('Documento não encontrado.');
+                return;
+            }
+
+            if (entry.password) {
+                const guess = prompt('Senha necessária. Digite a senha:');
+                if (guess !== entry.password) {
+                    alert('Senha incorreta. Acesso negado.');
+                    return;
+                }
+            }
+
+            showPopup(entry.text);
+        }
+
+        function showPopup(text) {
+            const popupText = document.getElementById('popup-text');
+            popupText.textContent = text;
+            document.getElementById('overlay').classList.remove('hidden');
+            document.getElementById('popup').classList.remove('hidden');
+        }
+
+        function closePopup() {
+            document.getElementById('overlay').classList.add('hidden');
+            document.getElementById('popup').classList.add('hidden');
+        }
+    </script>
+
+</body>
+</html>

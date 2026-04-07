@@ -1,0 +1,3 @@
+Entidade 3
+
+Arquivo protegido. A Entidade 3 possui detalhes sensíveis que requerem senha para consulta.

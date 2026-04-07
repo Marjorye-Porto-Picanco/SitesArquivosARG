@@ -1,0 +1,3 @@
+Entidade 5
+
+Arquivo protegido: a Entidade 5 pede senha antes de liberar seus detalhes.
