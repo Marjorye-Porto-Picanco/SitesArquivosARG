@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devlog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #fff0f5;
+            color: #5a2a3a;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            background: #ffb6d5;
+            padding: 10px 0;
+            border-bottom: 2px dashed #ff9ecb;
+        }
+
+        .navbar a {
+            color: #5a2a3a;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #ff4d88;
+            transform: scale(1.1);
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: #ffd6e7;
+            border-bottom: 2px dashed #ff9ecb;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            color: #7d4a62;
+        }
+
+        .devlogs-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px 40px;
+        }
+
+        .devlog-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .devlog-card {
+            background: #ffeaf3;
+            border: 2px solid #ffb6d5;
+            border-radius: 12px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .devlog-card:hover {
+            background: #fff;
+            box-shadow: 0 8px 20px rgba(90, 42, 58, 0.15);
+            transform: translateX(8px);
+        }
+
+        .devlog-thumbnail {
+            width: 120px;
+            height: 70px;
+            background: #ffb6d5;
+            border-radius: 8px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .devlog-info {
+            flex: 1;
+        }
+
+        .devlog-date {
+            color: #9d5a6e;
+            font-size: 0.9em;
+            margin-bottom: 6px;
+        }
+
+        .devlog-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .devlog-preview {
+            color: #7d4a62;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        /* Popup e Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 200, 220, 0.6);
+            z-index: 50;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff0f5;
+            border: 3px solid #ffb6d5;
+            border-radius: 16px;
+            padding: 30px;
+            z-index: 100;
+            max-width: 700px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(90, 42, 58, 0.3);
+            display: none;
+        }
+
+        .popup.active {
+            display: block;
+        }
+
+        .popup-header {
+            border-bottom: 2px dashed #ff9ecb;
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        .popup-date {
+            color: #9d5a6e;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .popup-title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .popup-image {
+            width: 100%;
+            border-radius: 10px;
+            margin: 16px 0;
+            border: 2px solid #ffb6d5;
+        }
+
+        .popup-content {
+            color: #5a2a3a;
+            line-height: 1.8;
+            font-size: 0.95em;
+        }
+
+        .popup-content p {
+            margin-bottom: 14px;
+        }
+
+        .popup-author {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 2px dashed #ff9ecb;
+            font-style: italic;
+            color: #9d5a6e;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #ffb6d5;
+            border: none;
+            color: #5a2a3a;
+            font-size: 24px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .popup-close:hover {
+            background: #ff4d88;
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        footer {
+            text-align: center;
+            padding: 18px 10px;
+            background: #ffd6e7;
+            border-top: 2px dashed #ff9ecb;
+            margin-top: 30px;
+            color: #7d4a62;
+        }
+
+        @media (max-width: 600px) {
+            .devlog-card {
+                flex-direction: column;
+            }
+
+            .devlog-thumbnail {
+                width: 100%;
+                height: 100px;
+            }
+
+            .popup {
+                max-width: 95%;
+                padding: 20px;
+            }
+
+            .popup-title {
+                font-size: 1.6em;
+            }
+        }
+
+        /* Scrollbar styling */
+        .popup::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .popup::-webkit-scrollbar-track {
+            background: #ffeaf3;
+            border-radius: 10px;
+        }
+
+        .popup::-webkit-scrollbar-thumb {
+            background: #ffb6d5;
+            border-radius: 10px;
+        }
+
+        .popup::-webkit-scrollbar-thumb:hover {
+            background: #ff9ecb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Devlog</h1>
+        <p>Acompanhe o desenvolvimento e as novidades do projeto</p>
+    </header>
+
+    <nav class="navbar">
+        <a href="inicio.html">Início</a>
+        <a href="arquivos.html">Arquivos</a>
+        <a href="entidades.html">Entidades</a>
+        <a href="devlog.html">Devlog</a>
+        <a href="sobrenos.html">Sobre Nós</a>
+    </nav>
+
+    <section class="devlogs-container">
+        <div class="devlog-cards">
+            <!-- Devlog 1 -->
+            <div class="devlog-card" onclick="openDevlog('devlog1')">
+                <div class="devlog-thumbnail">📝</div>
+                <div class="devlog-info">
+                    <div class="devlog-date">11 de Abril de 2026</div>
+                    <div class="devlog-title">Novo Sistema de Catálogo</div>
+                    <div class="devlog-preview">Implementação de filtros avançados para melhor navegação nos arquivos históricos...</div>
+                </div>
+            </div>
+
+            <!-- Devlog 2 -->
+            <div class="devlog-card" onclick="openDevlog('devlog2')">
+                <div class="devlog-thumbnail">🎨</div>
+                <div class="devlog-info">
+                    <div class="devlog-date">08 de Abril de 2026</div>
+                    <div class="devlog-title">Redefinição Visual do Site</div>
+                    <div class="devlog-preview">Nova paleta de cores e interface mais intuitiva foram aplicadas em todas as páginas...</div>
+                </div>
+            </div>
+
+            <!-- Devlog 3 -->
+            <div class="devlog-card" onclick="openDevlog('devlog3')">
+                <div class="devlog-thumbnail">⚙️</div>
+                <div class="devlog-info">
+                    <div class="devlog-date">05 de Abril de 2026</div>
+                    <div class="devlog-title">Otimizações de Performance</div>
+                    <div class="devlog-preview">O site agora carrega 40% mais rápido com novas técnicas de compressão de imagens...</div>
+                </div>
+            </div>
+
+            <!-- Devlog 4 -->
+            <div class="devlog-card" onclick="openDevlog('devlog4')">
+                <div class="devlog-thumbnail">🌐</div>
+                <div class="devlog-info">
+                    <div class="devlog-date">01 de Abril de 2026</div>
+                    <div class="devlog-title">Seção de Entidades Expandida</div>
+                    <div class="devlog-preview">Adicionados novos arquivos e documentos históricos argentinos ao catálogo...</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeDevlog()"></div>
+
+    <!-- Popups dos Devlogs -->
+    <div class="popup" id="devlog1">
+        <button class="popup-close" onclick="closeDevlog()">×</button>
+        <div class="popup-header">
+            <div class="popup-date">11 de Abril de 2026</div>
+            <div class="popup-title">Novo Sistema de Catálogo</div>
+        </div>
+        <div class="popup-content">
+            <p>Estamos felizes em anunciar o lançamento de um novo sistema de catálogo com funcionalidades avançadas de busca e filtro!</p>
+            <p>O novo sistema permite que voce:</p>
+            <ul>
+                <li>Busque por data, autor ou período histórico</li>
+                <li>Filtre documentos por categoria</li>
+                <li>Salve suas buscas favoritas</li>
+                <li>Exporte resultados em múltiplos formatos</li>
+            </ul>
+            <p>Essa atualização foi desenvolvida pensando na experiência do usuário e acessibilidade de todos os nossos visitantes.</p>
+            <div class="popup-author">— Equipe de Desenvolvimento</div>
+        </div>
+    </div>
+
+    <div class="popup" id="devlog2">
+        <button class="popup-close" onclick="closeDevlog()">×</button>
+        <div class="popup-header">
+            <div class="popup-date">08 de Abril de 2026</div>
+            <div class="popup-title">Redefinição Visual do Site</div>
+        </div>
+        <div class="popup-content">
+            <p>Após meses de planejamento e design, estamos apresentando uma nova paleta de cores e interface completamente redefinida!</p>
+            <p>As principais mudanças incluem:</p>
+            <ul>
+                <li>Nova identidade visual com cores mais suaves</li>
+                <li>Interface refeita para melhor ergonomia</li>
+                <li>Animações refinadas em toda a plataforma</li>
+                <li>Compatibilidade total com dispositivos móveis</li>
+            </ul>
+            <p>Esperamos que vocês aproveitem essa nova experiência tanto quanto nós gostamos de desenvolvê-la!</p>
+            <div class="popup-author">— Kamilly Corrêa, Desenvolvedora Web</div>
+        </div>
+    </div>
+
+    <div class="popup" id="devlog3">
+        <button class="popup-close" onclick="closeDevlog()">×</button>
+        <div class="popup-header">
+            <div class="popup-date">05 de Abril de 2026</div>
+            <div class="popup-title">Otimizações de Performance</div>
+        </div>
+        <div class="popup-content">
+            <p>Nossos testes indicam melhorias significativas na velocidade de carregamento do site!</p>
+            <p>O que foi otimizado:</p>
+            <ul>
+                <li>Compressão inteligente de imagens (redução de 40% em tamanho)</li>
+                <li>Carregamento assíncrono de elementos da página</li>
+                <li>Cache otimizado para visitas repetidas</li>
+                <li>Minificação de arquivos CSS e JavaScript</li>
+            </ul>
+            <p>Esses pequenos ajustes fazem uma grande diferença na experiência de navegação, especialmente para quem tem conexões mais lentas.</p>
+            <div class="popup-author">— Tiago Vinicius Amaral, Pesquisador</div>
+        </div>
+    </div>
+
+    <div class="popup" id="devlog4">
+        <button class="popup-close" onclick="closeDevlog()">×</button>
+        <div class="popup-header">
+            <div class="popup-date">01 de Abril de 2026</div>
+            <div class="popup-title">Seção de Entidades Expandida</div>
+        </div>
+        <div class="popup-content">
+            <p>A seção de entidades agora conta com muito mais informações e documentos históricos!</p>
+            <p>Novos adicionados:</p>
+            <ul>
+                <li>50 novos arquivos digitalizados</li>
+                <li>Descrições detalhadas para cada entidade</li>
+                <li>Fotografias de alta resolução</li>
+                <li>Links para fontes primárias e referências</li>
+            </ul>
+            <p>Nosso compromisso é manter o acervo constantemente atualizado com conteúdo de qualidade e relevância histórica.</p>
+            <div class="popup-author">— Paola Renault, Coordenadora de Conteúdo</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Site ARG. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function openDevlog(devlogId) {
+            const popup = document.getElementById(devlogId);
+            const overlay = document.getElementById('overlay');
+            popup.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDevlog() {
+            const popups = document.querySelectorAll('.popup');
+            const overlay = document.getElementById('overlay');
+            popups.forEach(popup => popup.classList.remove('active'));
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fechar popup ao clicar fora dele
+        document.getElementById('overlay').addEventListener('click', closeDevlog);
+
+        // Fechar popup com tecla ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeDevlog();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            background: #fff0f5;
+            color: #5a2a3a;
+        }
+
+        .navbar{
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            background: #ffb6d5;
+            padding: 10px 0;
+        }
+
+        .navbar a{
+            color: #5a2a3a;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #ff4d88;
+            transform: scale(1.1);
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: #ffd6e7;
+            border-bottom: 2px dashed #ff9ecb;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+            letter-spacing: 1.5px;
+        }
+
+        header p {
+            margin: 0;
+            color: #7d4a62;
+        }
+
+        .contacts {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 20px 40px;
+        }
+
+        .contacts h2 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-card {
+            background: #ffeaf3;
+            border: 2px solid #ffb6d5;
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 10px 24px rgba(90, 42, 58, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 30px rgba(90, 42, 58, 0.16);
+        }
+
+        .contact-card img {
+            width: 100%;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            background: #fff0f5;
+        }
+
+        .contact-card h3 {
+            margin: 0 0 8px;
+            font-size: 1.4em;
+        }
+
+        .role {
+            margin: 0 0 12px;
+            color: #9d5a6e;
+            font-style: italic;
+        }
+
+        .description {
+            margin: 0 0 16px;
+            line-height: 1.6;
+        }
+
+        .contact-card p {
+            margin: 6px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 18px 10px;
+            background: #ffd6e7;
+            border-top: 2px dashed #ff9ecb;
+            margin-top: 10px;
+            color: #7d4a62;
+        }
+
+        @media (max-width: 520px) {
+            .contacts {
+                padding: 18px 12px 30px;
+            }
+
+            header {
+                padding: 24px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Contato</h1>
+        <p>Fale com nossa equipe e conheça as pessoas por trás do site.</p>
+    </header>
+    <div>
+        <nav class="navbar">
+            <a href="inicio.html">Início</a>
+            <a href="arquivos.html">Arquivos</a>
+            <a href="entidades.html">Entidades</a>
+            <a href="devlog.html">Devlog</a>
+            <a href="sobrenos.html">Sobre Nós</a>
+        </nav>
+    </div>
+    <main>
+        <section class="contacts">
+            <h2>Nossa Equipe</h2>
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <img src="img/pessoa1.svg" alt="Paola Renault">
+                    <h3>Paola Renault</h3>
+                    <p class="role">Coordenadora de conteúdo</p>
+                    <p class="description">Paola organiza os arquivos, revisa textos e conserva as histórias para que cada registro seja acessível e relevante.</p>
+                    <p><strong>Email:</strong> paola.renault@gmail.com</p>
+                    <p><strong>Telefone:</strong> (11) 9 8123-4567</p>
+                </div>
+
+                <div class="contact-card">
+                    <img src="img/pessoa2.svg" alt="Tiago Vinicius Amaral">
+                    <h3>Tiago Vinicius Amaral </h3>
+                    <p class="role">Pesquisador histórico</p>
+                    <p class="description">Tiago pesquisa as entidades e documentos, trazendo contexto e importância para cada peça do acervo brasileiro.</p>
+                    <p><strong>Email:</strong> tiagovini@gmail.com</p>
+                    <p><strong>Telefone:</strong> (11) 9 8432-1098</p>
+                </div>
+
+                <div class="contact-card">
+                    <img src="img/pessoa3.svg" alt="Kamilly Corrêa">
+                    <h3>Kamilly Corrêa</h3>
+                    <p class="role">Desenvolvedora web</p>
+                    <p class="description">Kamilly mantém o site bonito e funcional, cuidando do design e da experiência para quem navega pelo acervo.</p>
+                    <p><strong>Email:</strong> kamillycorrêa25@gmail.com</p>
+                    <p><strong>Telefone:</strong> (11) 9 7654-3210</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Site ARG. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
