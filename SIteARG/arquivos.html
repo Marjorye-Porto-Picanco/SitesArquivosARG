@@ -75,7 +75,8 @@
         }
 
         .hidden{
-            display: none;
+            display: none !important;
+            visibility: hidden !important;
         }
 
         .popup{
@@ -85,10 +86,99 @@
             transform: translate(-50%, -50%);
             background: #fff0f5;
             border: 2px solid #ff8ac4;
-            padding: 20px;
-             z-index: 10;
-             width: 300px;
-             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 0;
+            z-index: 10;
+            width: 80%;
+            max-width: 900px;
+            max-height: 85vh;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #popup-text {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        .document-header {
+            text-align: center;
+            border-bottom: 2px dashed #ff9ecb;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .document-header h2 {
+            margin: 0 0 15px 0;
+            color: #5a2a3a;
+            font-size: 1.8em;
+            letter-spacing: 1px;
+        }
+
+        .document-header p {
+            margin: 8px 0;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .document-content h3 {
+            color: #c42e6a;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            border-left: 4px solid #ff8ac4;
+            padding-left: 10px;
+        }
+
+        .document-content ul {
+            margin-left: 20px;
+            padding-left: 20px;
+        }
+
+        .document-content li {
+            margin: 8px 0;
+            color: #5a2a3a;
+        }
+
+        .documento-galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 182, 213, 0.3);
+            border-radius: 8px;
+        }
+
+        .documento-galeria img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #ffb6d5;
+            transition: transform 0.3s;
+        }
+
+        .documento-galeria img:hover {
+            transform: scale(1.05);
+        }
+
+        .document-footer {
+            text-align: center;
+            border-top: 2px dashed #ff9ecb;
+            padding-top: 15px;
+            margin-top: 20px;
+        }
+
+        .document-footer p {
+            margin: 5px 0;
+            font-weight: bold;
+            color: #5a2a3a;
         }
 
         .overlay{
@@ -130,7 +220,7 @@
             <a href="arquivos.html">Arquivos</a>
             <a href="entidades.html">Entidades</a>
             <a href="devlog.html">Devlog</a>
-            <a href="contact.html">Sobre Nós</a>
+            <a href="sobrenos.html">Sobre Nós</a>
         </nav>
     </div>
 
@@ -161,47 +251,367 @@
 
     <div id="overlay" class="overlay hidden" onclick="closePopup()"></div>
 
-    <div id="popup" class="popup hidden">
-        <p id="popup-text"></p>
-        <button onclick="closePopup()">fechar</button>
+    <div id="popup" class="popup hidden" onclick="event.stopPropagation();">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; background: #ffd6e7; border-bottom: 1px solid #ffb6d5;">
+            <h3 style="margin: 0; color: #5a2a3a;">Arquivo Confidencial</h3>
+            <button onclick="closePopup(); return false;" style="background: #ff8ac4; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold;">✕ Fechar</button>
+        </div>
+        <div id="popup-text"></div>
     </div>
 
     <script>
         const content = {
-            'Arquivo1.exe': 'O Arquivo 1 contém informações sobre um projeto secreto que estamos desenvolvendo. Ele é altamente confidencial e só pode ser acessado por pessoas autorizadas.',
-            'Arquivo2.exe': 'O Arquivo 2 é um banco de dados com registros de clientes e transações. Ele é protegido por criptografia avançada para garantir a segurança dos dados.',
-            'Arquivo3.exe': 'O Arquivo 3 é um relatório das entidades que mostra o características das entidades nos últimos meses. Ele é usado para estudos internos e não deve ser compartilhado com terceiros.',
-            'Arquivo4.exe': 'O Arquivo 4 é um documento de planejamento estratégico para os próximos anos. Ele contém informações sensíveis sobre nossos planos de expansão e parcerias futuras.'
+            'Arquivo1.exe': `
+                <div class="document-header">
+                    <h2>DEPARTAMENTO DE ANOMALIAS POLICIAIS ESPECIAIS</h2>
+                    <p><strong>CLASSIFICAÇÃO:</strong> ULTRA CONFIDENCIAL</p>
+                    <p><strong>DATA:</strong> 19/03/1980</p>
+                    <p><strong>PROTOCOLO:</strong> DAPE-0001-A</p>
+                </div>
+
+                <div class="document-content">
+                    <h3>SUMÁRIO</h3>
+                    <p>Criação oficial do <u>Departamento de Anomalias Policiais Especiais</u> (DAPE), após investigação de atividades ilegais envolvendo <strong>experimentos humanos</strong> e desenvolvimento de capacidades <strong>anômalas</strong>.</p>
+
+                    <h3>RELATÓRIO INICIAL</h3>
+                    <p>No início do ano de 1980, autoridades brasileiras iniciaram uma investigação sigilosa após um aumento significativo nos casos de desaparecimento de <strong>recém-nascidos em hospitais públicos e privados</strong>.</p>
+                    
+                    <p>Denúncias anônimas indicavam a existência de uma organização clandestina liderada por um <strong>ex-médico</strong>, <strong>Vanderson Medeiros</strong>, proprietário de uma instituição hospitalar, envolvido em práticas ilegais, incluindo:</p>
+                    <ul>
+                        <li>Sequestro de indivíduos em situação vulnerável;</li>
+                        <li>Experimento humano sem consentimento;</li>
+                        <li>Manipulação <strong>neurológica</strong> e psicológica;</li>
+                        <li>Tentativas de criação de indivíduos com capacidades além dos limites <strong>humanos</strong>;</li>
+                    </ul>
+
+                    <h3>DESCOBERTA DO LABORATÓRIO</h3>
+                    <p>Após meses de investigação, foi localizado um laboratório oculto em <strong>território nacional</strong>, localizado em <strong>Pelotas Rio Grande do Sul</strong>.</p>
+                    
+                    <p>No local, foram encontrados:</p>
+                    <ul>
+                        <li>Registros médicos alterados;</li>
+                        <li>Equipamentos de origem <strong>desconhecida</strong>;</li>
+                        <li>Indivíduos em estado crítico;</li>
+                        <li>Evidências de modificação <strong>cerebral</strong> avançada;</li>
+                    </ul>
+
+                    <div class="documento-galeria">
+                        <img src="img/labimg1.jpg" alt="Evidência 1">
+                        <img src="img/labimg2.jpg" alt="Evidência 2">
+                        <img src="img/labimg3.jpg" alt="Evidência 3">
+                    </div>
+
+                    <p>Um dos sobreviventes, identificado como <strong>ex-militar do BOPE</strong>, <strong>Breno Gonçalves de Lima</strong>, apresentou habilidades incomuns, incluindo:</p>
+                    <ul>
+                        <li>Aumento de reflexos;</li>
+                        <li>Resistência física elevada;</li>
+                        <li>Percepção <strong>sensorial ampliada</strong>;</li>
+                        <li><strong>Intelecto melhorado</strong>;</li>
+                        <li><strong>Velocidade elevada</strong>;</li>
+                    </ul>
+
+                    <h3>INCIDENTE E DESTRUIÇÃO DO LOCAL</h3>
+                    <p>Durante a operação, houve confronto entre <strong>forças policiais</strong> e <strong>responsáveis pelo laboratório</strong>.</p>
+                    <p>Horas após a invasão, o local foi <strong>destruído por uma explosão</strong> de origem desconhecida.</p>
+                    <p><strong>Consequências:</strong></p>
+                    <ul>
+                        <li>Parceiros policiais feridos;</li>
+                        <li>Perda parcial de evidências;</li>
+                        <li>Fuga de indivíduos alterados ("Anomalias");</li>
+                        <li>Desaparecimento de <strong>suspeitos-chaves</strong>;</li>
+                    </ul>
+
+                    <h3>FUNDAÇÃO DA DAPE</h3>
+                    <p>Diante da ameaça representada pelas anomalias e da possibilidade da existência de outros <strong>laboratórios clandestinos</strong>, foi criado o <u>Departamento de Anomalias Policiais Especiais DAPE</u>.</p>
+
+                    <h3>OBJETIVOS:</h3>
+                    <ul>
+                        <li>Identificar e conter <strong>anomalias</strong>. Em último caso, eliminá-las;</li>
+                        <li>Investigar organizações envolvidas;</li>
+                        <li>Monitorar <strong>atividades incomuns</strong> no território nacional;</li>
+                        <li>Manter qualquer tipo de vida segura;</li>
+                        <li>Manter nossos agentes com <strong>habilidades especiais</strong>;</li>
+                    </ul>
+
+                    <h3>OBSERVAÇÕES FINAIS</h3>
+                    <p>Há indícios de envolvimento <strong>internacional</strong> nas atividades descritas.</p>
+                    <p>A continuidade das investigações é considerada prioridade máxima. Qualquer caso que envolva uma vida em risco é de extrema atenção do departamento.</p>
+
+                    <div class="document-footer">
+                        <p><strong>STATUS:</strong> ATIVO</p>
+                        <p><strong>NÍVEL DE AMEAÇA:</strong> ALTO</p>
+                    </div>
+                </div>
+            `,
+            'Arquivo2.exe': `
+                <div class="document-header">
+                    <h2>BANCO DE DADOS CONFIDENCIAL</h2>
+                    <p><strong>CLASSIFICAÇÃO:</strong> CONFIDENCIAL</p>
+                    <p><strong>DATA:</strong> 15/04/1980</p>
+                    <p><strong>PROTOCOLO:</strong> DAPE-0002-BD</p>
+                </div>
+
+                <div class="document-content">
+                    <h3>REGISTROS DE TRANSAÇÕES SUSPEITAS</h3>
+                    <p>Este banco de dados contém registros de transações financeiras suspeitas relacionadas às atividades do laboratório clandestino descoberto em Pelotas/RS.</p>
+
+                    <h3>CLIENTES IDENTIFICADOS</h3>
+                    <div style="background: rgba(255, 182, 213, 0.2); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4>Cliente #001: Dr. Vanderson Medeiros</h4>
+                        <p><strong>Valor total transferido:</strong> R$ 2.450.000,00</p>
+                        <p><strong>Período:</strong> Janeiro 1979 - Março 1980</p>
+                        <p><strong>Origem dos fundos:</strong> Contas offshore não identificadas</p>
+                        <p><strong>Destino:</strong> Aquisição de equipamentos médicos e químicos</p>
+                    </div>
+
+                    <div style="background: rgba(255, 182, 213, 0.2); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4>Cliente #002: Instituto Médico Santa Clara</h4>
+                        <p><strong>Valor total transferido:</strong> R$ 890.000,00</p>
+                        <p><strong>Período:</strong> Agosto 1979 - Fevereiro 1980</p>
+                        <p><strong>Origem dos fundos:</strong> Doações anônimas</p>
+                        <p><strong>Destino:</strong> Construção de ala subterrânea não registrada</p>
+                    </div>
+
+                    <div style="background: rgba(255, 182, 213, 0.2); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4>Cliente #003: [DADOS CORROMPIDOS]</h4>
+                        <p><strong>Valor total transferido:</strong> R$ 1.200.000,00</p>
+                        <p><strong>Período:</strong> Dados indisponíveis</p>
+                        <p><strong>Origem dos fundos:</strong> Conta internacional (Suíça)</p>
+                        <p><strong>Destino:</strong> Pesquisa e desenvolvimento experimental</p>
+                        <p style="color: #ff4d88;"><em>⚠️ ALERTA: Dados parcialmente criptografados. Possível envolvimento internacional.</em></p>
+                    </div>
+
+                    <h3>ANÁLISE DE PADRÕES</h3>
+                    <ul>
+                        <li><strong>Volume crescente:</strong> Transações aumentaram 300% nos últimos 6 meses</li>
+                        <li><strong>Origens suspeitas:</strong> 70% dos fundos vêm de contas offshore</li>
+                        <li><strong>Destinos comuns:</strong> Equipamentos médicos, produtos químicos e construção</li>
+                        <li><strong>Conexões:</strong> Todos os clientes têm ligação direta ou indireta com Vanderson Medeiros</li>
+                    </ul>
+
+                    <h3>RECOMENDAÇÕES</h3>
+                    <p>Recomenda-se investigação aprofundada das contas offshore e rastreamento dos equipamentos adquiridos. Possível conexão com organizações internacionais envolvidas em pesquisa genética proibida.</p>
+
+                    <div class="document-footer">
+                        <p><strong>STATUS:</strong> EM ANÁLISE</p>
+                        <p><strong>NÍVEL DE AMEAÇA:</strong> MÉDIO</p>
+                    </div>
+                </div>
+            `,
+            'Arquivo3.exe': `
+                <div class="document-header">
+                    <h2>RELATÓRIO DE ENTIDADES ANÔMALAS</h2>
+                    <p><strong>CLASSIFICAÇÃO:</strong> ULTRA CONFIDENCIAL</p>
+                    <p><strong>DATA:</strong> 20/04/1980</p>
+                    <p><strong>PROTOCOLO:</strong> DAPE-0003-ENT</p>
+                </div>
+
+                <div class="document-content">
+                    <h3>ENTIDADES IDENTIFICADAS</h3>
+                    <p>Relatório detalhado sobre as anomalias resultantes dos experimentos realizados no laboratório clandestino de Pelotas/RS.</p>
+
+                    <h3>ENTIDADE ALFA-01: "O SOBREVIVENTE"</h3>
+                    <div style="background: rgba(255, 182, 213, 0.2); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4>Identificação: Breno Gonçalves de Lima</h4>
+                        <p><strong>Status:</strong> Vivo - Em custódia</p>
+                        <p><strong>Habilidades identificadas:</strong></p>
+                        <ul>
+                            <li>Reflexos aumentados (300% acima do normal)</li>
+                            <li>Resistência física elevada</li>
+                            <li>Percepção sensorial ampliada</li>
+                            <li>Intelecto melhorado</li>
+                            <li>Velocidade elevada</li>
+                        </ul>
+                        <p><strong>Avaliação:</strong> Extremamente perigoso. Capacidades superiores às de qualquer atleta olímpico.</p>
+                    </div>
+
+                    <h3>ENTIDADES BETA: "OS DESAPARECIDOS"</h3>
+                    <div style="background: rgba(255, 182, 213, 0.2); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4>Status: Desaparecidos após explosão</h4>
+                        <p><strong>Número estimado:</strong> 12-15 indivíduos</p>
+                        <p><strong>Características observadas:</strong></p>
+                        <ul>
+                            <li>Alterações físicas visíveis (pele pálida, olhos luminescentes)</li>
+                            <li>Comportamento agressivo</li>
+                            <li>Possível regeneração acelerada</li>
+                            <li>Inteligência animal (instintos aprimorados)</li>
+                        </ul>
+                        <p><strong>Ameaça:</strong> Alta. Possivelmente à solta na população.</p>
+                    </div>
+
+                    <h3>ENTIDADES GAMA: "OS FALECIDOS"</h3>
+                    <div style="background: rgba(255, 182, 213, 0.2); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h4>Status: Mortos durante a operação</h4>
+                        <p><strong>Número confirmado:</strong> 8 corpos recuperados</p>
+                        <p><strong>Características:</strong></p>
+                        <ul>
+                            <li>Deformações extremas incompatíveis com vida</li>
+                            <li>Implantes cibernéticos rejeitados pelo organismo</li>
+                            <li>Alterações genéticas instáveis</li>
+                        </ul>
+                        <p><strong>Observação:</strong> Corpos incinerados para evitar contaminação.</p>
+                    </div>
+
+                    <h3>PROTOCOLO DE CONTENÇÃO</h3>
+                    <ul>
+                        <li><strong>Entidades Alfa:</strong> Isolamento total e monitoramento constante</li>
+                        <li><strong>Entidades Beta:</strong> Busca ativa e neutralização se necessário</li>
+                        <li><strong>Entidades Gama:</strong> Protocolo de limpeza já executado</li>
+                    </ul>
+
+                    <h3>AVALIAÇÃO GERAL</h3>
+                    <p>Os experimentos realizados representam um avanço tecnológico perigoso. As entidades criadas possuem capacidades que desafiam as leis da natureza. Recomenda-se vigilância máxima e preparação para cenários de emergência.</p>
+
+                    <div class="document-footer">
+                        <p><strong>STATUS:</strong> ATIVO</p>
+                        <p><strong>NÍVEL DE AMEAÇA:</strong> CRÍTICO</p>
+                    </div>
+                </div>
+            `,
+            'Arquivo4.exe': `
+                <div class="document-header">
+                    <h2>PLANEJAMENTO ESTRATÉGICO DAPE</h2>
+                    <p><strong>CLASSIFICAÇÃO:</strong> INTERNO</p>
+                    <p><strong>DATA:</strong> 01/05/1980</p>
+                    <p><strong>PROTOCOLO:</strong> DAPE-0004-PLAN</p>
+                </div>
+
+                <div class="document-content">
+                    <h3>VISÃO GERAL</h3>
+                    <p>O Departamento de Anomalias Policiais Especiais (DAPE) foi criado para lidar com ameaças que transcendem as capacidades das forças policiais tradicionais. Nossa missão é proteger a sociedade de anomalias e organizações clandestinas envolvidas em pesquisa proibida.</p>
+
+                    <h3>OBJETIVOS DE CURTO PRAZO (1980-1982)</h3>
+                    <ul>
+                        <li>Estabelecer rede de informantes em instituições médicas</li>
+                        <li>Desenvolver protocolos de contenção para entidades anômalas</li>
+                        <li>Mapeamento de laboratórios clandestinos suspeitos</li>
+                        <li>Treinamento especializado para agentes</li>
+                    </ul>
+
+                    <h3>OBJETIVOS DE MÉDIO PRAZO (1983-1985)</h3>
+                    <ul>
+                        <li>Expansão nacional com bases regionais</li>
+                        <li>Parcerias internacionais discretas</li>
+                        <li>Desenvolvimento de tecnologias de detecção</li>
+                        <li>Programa de recrutamento de agentes especiais</li>
+                    </ul>
+
+                    <h3>OBJETIVOS DE LONGO PRAZO (1986+)</h3>
+                    <ul>
+                        <li>Erradicação completa de ameaças anômalas</li>
+                        <li>Monitoramento global de atividades suspeitas</li>
+                        <li>Avanço em pesquisa ética para contrabalançar ameaças</li>
+                        <li>Proteção da soberania nacional contra influências externas</li>
+                    </ul>
+
+                    <h3>RECURSOS NECESSÁRIOS</h3>
+                    <ul>
+                        <li>Orçamento anual: R$ 50 milhões (estimativa)</li>
+                        <li>Equipe especializada: 200 agentes</li>
+                        <li>Instalações seguras em todo território nacional</li>
+                        <li>Tecnologia de ponta para detecção e contenção</li>
+                    </ul>
+
+                    <h3>DESAFIOS PREVISÍVEIS</h3>
+                    <ul>
+                        <li>Resistência burocrática interna</li>
+                        <li>Falta de compreensão pública sobre ameaças</li>
+                        <li>Possível infiltração por organizações rivais</li>
+                        <li>Evolução constante das ameaças anômalas</li>
+                    </ul>
+
+                    <h3>CONCLUSÃO</h3>
+                    <p>O DAPE representa a linha de defesa final contra ameaças que a sociedade moderna ainda não compreende completamente. Com planejamento estratégico e execução disciplinada, garantiremos a segurança e a soberania do Brasil contra todas as anomalias.</p>
+
+                    <div class="document-footer">
+                        <p><strong>STATUS:</strong> EM DESENVOLVIMENTO</p>
+                        <p><strong>NÍVEL DE PRIORIDADE:</strong> MÁXIMA</p>
+                    </div>
+                </div>
+            `
         };
 
         const passwords = {
+            'Arquivo1.exe': 'DAPE1980',
             'Arquivo2.exe': 'senha123',
             'Arquivo3.exe': 'senha456'
         };
 
         function openDocument(arquivo) {
             if (passwords[arquivo]) {
-                const password = prompt(`Digite a senha para acessar ${arquivo}:`);
-                if (password === passwords[arquivo]) {
-                    showPopup(content[arquivo]);
-                } else {
-                    alert('Senha incorreta! Tente novamente ou escolha outro arquivo.');
-                }
+                showPasswordPrompt(arquivo);
             } else {
                 showPopup(content[arquivo]);
             }
         }
 
-        function showPopup(text) {
-            document.getElementById('popup-text').textContent = text;
-            document.getElementById('popup').classList.remove('hidden');
-            document.getElementById('overlay').classList.remove('hidden');
+        function showPasswordPrompt(arquivo) {
+            const passwordHtml = `
+                <div style="text-align: center; padding: 30px;">
+                    <h3 style="color: #5a2a3a; margin-bottom: 20px;">🔒 ACESSO RESTRITO</h3>
+                    <p style="margin-bottom: 20px; color: #666;">Digite a senha para acessar ${arquivo}:</p>
+                    <input type="password" id="password-input" style="padding: 10px; border: 2px solid #ffb6d5; border-radius: 5px; font-size: 16px; width: 200px; margin-bottom: 20px;" placeholder="Senha..." onkeydown="if(event.key === 'Enter') checkPassword('${arquivo}')">
+                    <br>
+                    <button onclick="checkPassword('${arquivo}')" style="background: #ff8ac4; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-right: 10px;">Confirmar</button>
+                    <button onclick="closePopup()" style="background: #666; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Cancelar</button>
+                </div>
+            `;
+            showPopup(passwordHtml);
+        }
+
+        function checkPassword(arquivo) {
+            const input = document.getElementById('password-input');
+            if (input && input.value.trim() === passwords[arquivo]) {
+                showPopup(content[arquivo]);
+            } else {
+                alert('❌ Senha incorreta! Acesso negado.');
+                closePopup();
+            }
+        }
+
+        function showPopup(htmlContent) {
+            document.getElementById('popup-text').innerHTML = htmlContent;
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            popup.classList.remove('hidden');
+            overlay.classList.remove('hidden');
+            popup.style.display = '';
+            overlay.style.display = '';
         }
 
         function closePopup() {
-            document.getElementById('popup').classList.add('hidden');
-            document.getElementById('overlay').classList.add('hidden');
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            if (popup) {
+                popup.classList.add('hidden');
+                popup.style.display = 'none';
+            }
+            if (overlay) {
+                overlay.classList.add('hidden');
+                overlay.style.display = 'none';
+            }
+            return false;
         }
+
+        // Garantir que o popup começa oculto ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            if (popup && !popup.classList.contains('hidden')) {
+                popup.classList.add('hidden');
+            }
+            if (overlay && !overlay.classList.contains('hidden')) {
+                overlay.classList.add('hidden');
+            }
+        });
+
+        // Executar imediatamente também
+        (function() {
+            const popup = document.getElementById('popup');
+            const overlay = document.getElementById('overlay');
+            if (popup) popup.classList.add('hidden');
+            if (overlay) overlay.classList.add('hidden');
+        })();
     </script>
 
 </body>
